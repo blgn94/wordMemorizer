@@ -96,8 +96,8 @@ const HomePage = ({session} : any) => {
                 </div>
                 <div className={css.mainSection}>
                     <div className={css.titleSection}>
-                        <h1>Хүссэн үгээ цээжилцгээе</h1>    
                         <p>Өөрийн оруулсан шинэ үгсээ сонирхолтой аргаар чээжил</p>
+                        <p>Хүссэн үгээ цээжилцгээе</p>
                     </div>
                     <form className={css.formStyle} onSubmit={handleSubmit}>
                         <input
