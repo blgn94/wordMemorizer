@@ -1,0 +1,36 @@
+.miniGameStartContianer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 400px;
+    margin-top: 60px;
+}
+
+.readyToPlayTitle {
+    margin-bottom: 10px;
+}
+
+.greyText {
+    color: #777777;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.startGameButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #111111;
+    width: 230px;
+    height: 60px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 24px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.startGameButton:hover {
+    transform: scale(0.95);
+}

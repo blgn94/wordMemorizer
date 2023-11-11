@@ -1,0 +1,74 @@
+.congratsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 500px;
+}
+
+.congratsSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+
+.reviewContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 600px;
+    height: 150px;
+    background-color: #111111;
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.2s ease;
+}
+
+.reviewContainer:hover {
+    transform: scale(0.96);
+}
+
+.restartContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 600px;
+    height: 150px;
+    background-color: #111111;
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.2s ease;
+}
+
+.restartContainer:hover {
+    transform: scale(0.96);
+}
+
+.reviewTextContainer {
+    text-align: start;
+}
+
+.restartTextContainer {
+    text-align: start;
+}
+
+.reviewIcon {
+    font-size: 40px;
+    margin: 0 20px;
+    color: #FF4B4B;
+}
+
+.restartIcon {
+    font-size: 40px;
+    margin: 0 20px;
+    color: #5786FF;
+}
+
+.smallGreyTexts {
+    color: #838383;
+    font-weight: bold;
+}

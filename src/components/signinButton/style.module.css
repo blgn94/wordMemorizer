@@ -1,0 +1,16 @@
+.SignInButton {
+    width: 130px;
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+    background-color: #fe6b68;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.SignInButton:active {
+    transform: scale(0.96);
+}
