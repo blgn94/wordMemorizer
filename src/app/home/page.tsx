@@ -114,11 +114,12 @@ const HomePage = ({session} : any) => {
                             value={typedWordDefinition}
                             onChange={(e) => {setTypedWordDefinition(e.target.value);}}
                             placeholder='Чээжлэх үгийн утгыг оруулна уу...'></input>
-                        <select className={css.inputStyle} name='wordType' value={typedWordType} onChange={(e) => {setTypedWordType(e.target.value);}} required>
-                            <option value="" disabled selected>Чээжлэх үгийн төрлийг оруулна уу...</option>
+                        <select value={typedWordType} className={css.inputStyle} name='wordType' onChange={(e) => {setTypedWordType(e.target.value);}} required>
+                            <option value='' disabled selected>Чээжлэх үгийн төрлийг оруулна уу...</option>
                             <option>Noun</option>
                             <option>Verb</option>
                             <option>Adjective</option>
+                            <option>Adverb</option>
                         </select>
                         <button className={css.formButton} type='submit'>Хадгалах</button>
                     </form>
