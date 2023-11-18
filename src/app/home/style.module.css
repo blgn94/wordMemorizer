@@ -138,3 +138,18 @@
     font-weight: bold;
     margin-top: 10px;
 }
+
+@media (max-width: 768px) {
+    .mainSection {
+        margin: 150px 10px 0 10px;
+    }
+    .titleSection p {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .titleSection p {
+        font-size: 20px;
+    }
+}

@@ -14,6 +14,11 @@
     font-size: 25px;
 }
 
+.congratsSection h1 {
+    font-size: 1.5em;
+    /* font-size: 25px; */
+}
+
 .reviewContainer {
     display: flex;
     flex-direction: row;
@@ -71,4 +76,41 @@
 .smallGreyTexts {
     color: #838383;
     font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .congratsContainer {
+        height: 400px;
+    }
+
+    .congratsSection h1 {
+        font-size: 1.4em;
+    }
+
+    .congratsContainer p {
+        font-size: 14px;
+    }
+
+    .congratsSection img {
+        width: 70px;
+    }
+
+    .reviewContainer,
+    .restartContainer {
+        width: 90%;
+        height: 120px;
+        padding: 15px;
+    }
+
+    .reviewContainer h1,
+    .restartContainer h1 {
+        font-size: 1.2em;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .congratsSection h1 {
+        font-size: 1em;
+    }
 }

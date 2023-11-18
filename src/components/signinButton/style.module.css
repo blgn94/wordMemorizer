@@ -14,3 +14,9 @@
 .SignInButton:active {
     transform: scale(0.96);
 }
+
+@media (max-width: 576px) {
+    .SignInButton {
+        width: 90px;
+    }
+}

@@ -33,3 +33,9 @@
 .userName {
     margin-right: 10px;
 }
+
+@media (max-width: 576px) {
+    .userName {
+        display: none;
+    }
+}
