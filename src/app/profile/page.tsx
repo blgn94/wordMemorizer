@@ -106,18 +106,20 @@ const Profile = () => {
                 <div>
                     <h1>Collected words</h1>
                     <div className={css.vocabularySection}>
-                        {
-                            vocabulary !== undefined ? vocabulary?.map((item : any) => {
-                                return(
-                                    <div key={item.english} className={css.wordStyle}>
-                                        <span className={css.exactWordStyle}>{item.english}</span> <span>({item.type})</span> {" - "} <span className={css.mongolianWordStyle}>{item.mongolian}</span>
-                                    </div>
-                                );
-                            }) : 
-                            <div className={css.wordStyle}>
-                                <span>Хоосон байна!</span>
-                            </div>
-                        }
+                        <div className={css.vocabularyContainer}>
+                            {
+                                vocabulary !== undefined ? vocabulary?.map((item : any) => {
+                                    return(
+                                        <div key={item.english} className={css.wordStyle}>
+                                            <span className={css.exactWordStyle}>{item.english}</span> <span>({item.type})</span> {" - "} <span className={css.mongolianWordStyle}>{item.mongolian}</span>
+                                        </div>
+                                    );
+                                }) : 
+                                <div className={css.wordStyle}>
+                                    <span>Хоосон байна!</span>
+                                </div>
+                            }
+                        </div>
                     </div>
                     <div className={css.navigationStyle}></div>
                 </div>

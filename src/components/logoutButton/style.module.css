@@ -14,3 +14,9 @@
 .LogOutButton:active {
     transform: scale(0.96);
 }
+
+@media (max-width: 576px) {
+    .LogOutButton {
+        width: 90px;
+    }
+}

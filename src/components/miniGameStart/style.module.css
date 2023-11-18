@@ -34,3 +34,12 @@
 .startGameButton:hover {
     transform: scale(0.95);
 }
+
+@media (max-width: 768px) {
+    .miniGameStartContianer {
+        height: 350px;
+    }
+    .miniGameStartContianer img {
+        width: 100px;
+    }
+}

@@ -49,7 +49,12 @@
     height: 450px;
     margin: 10px auto;
     overflow-y: scroll;
-    padding-top: 35px;
+    /* padding-top: 35px; */
+}
+
+.vocabularyContainer {
+    height: 100%;
+    width: 100%;
 }
 
 .wordStyle {
@@ -158,4 +163,51 @@
 
 .faXmark:hover {
     transform: scale(0.8);
+}
+
+@media (max-width: 1200px) {
+    .menuEachStyles {
+        width: 260px; 
+        margin-bottom: 10px;
+        margin-right: 10px;
+        box-shadow: #363636 5px 5px 0px;
+    }
+    .activeMenuEach {
+        background-color: #363636;
+        box-shadow: #111111 5px 5px 0px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .activeMenuEach {
+        background-color: #363636;
+        box-shadow: #111111 5px 5px 0px;
+    }
+
+    .scoreSection,
+    .flashcardButtons {
+        width: 80%; 
+    }
+}
+
+@media (max-width: 768px) {
+    .menuEachStyles {
+        width: 90%; 
+        margin-bottom: 10px;
+        box-shadow: #363636 5px 5px 0px;
+    }
+
+    .activeMenuEach {
+        background-color: #363636;
+        box-shadow: #111111 5px 5px 0px;
+    }
+
+    .menuSection {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .vocabularySection {
+        height: 350px;
+    }
 }
