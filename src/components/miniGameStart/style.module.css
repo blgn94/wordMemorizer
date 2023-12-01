@@ -35,11 +35,24 @@
     transform: scale(0.95);
 }
 
-@media (max-width: 768px) {
+.noVocabulary {
+    font-weight: bold;
+    color: rgb(175, 0, 0);
+}
+
+@media screen and (max-width: 700px) {
     .miniGameStartContianer {
-        height: 350px;
+        font-size: 12px;
+        height: 300px;
     }
-    .miniGameStartContianer img {
+    .pictureStyle {
         width: 100px;
+        height: 100px;
+    }
+    .startGameButton {
+        width: 140px;
+        height: 45px;
+        border-radius: 10px;
+        font-size: 18px;
     }
 }

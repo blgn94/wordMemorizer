@@ -50,8 +50,8 @@ const HomePage = ({session} : any) => {
                     userWordData = [
                         ...userWordData[0],
                         {
-                            english: word,
-                            mongolian: pressedWordDefinition,
+                            wordEn: word,
+                            definitionMn: pressedWordDefinition,
                             type: pressedWordType
                         },
                     ];
@@ -72,8 +72,8 @@ const HomePage = ({session} : any) => {
             else {
                 userWordData = [
                     {
-                        english: word,
-                        mongolian: pressedWordDefinition,
+                        wordEn: word,
+                        definitionMn: pressedWordDefinition,
                         type: pressedWordType
                     },
                 ];
