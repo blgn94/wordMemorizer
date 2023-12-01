@@ -1,87 +1,104 @@
-'use client'
-import { randomInt } from 'crypto';
 import css from './style.module.css';
 import { useEffect, useState } from 'react';
 
-const MiniGameSection = ( {vocabulary} : any ) => {
-    let toggleItem = -1;
-    let toggleOnOff = 'off';
-    // const [ shuffledElements, setShuffledElements ] = useState([]);
-    // const [toggleItem, setToggleItem] = useState(-1);
-    // const [toggleOnOff, setToggleOnOff] = useState('off');
-    const shuffledValues : any = [];
-    const generateRandomWords = (min : any, max : any) => {
-        const randomWords = [];
-        const availableNumbers = Array.from({ length: max - min + 1 }, (_, i) => i + min);
-        for(let i=0;  i<8; i++) 
-            randomWords[i] = vocabulary.words[availableNumbers[i]];
-        return randomWords;
-    }
-    const shuffleTheCards = (randomWords : any) => {
-        const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-        const shuffledArray = [...array];
-        for (let i = shuffledArray.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-        }
-        const cardsValues = [
-            randomWords[0].word,
-            randomWords[0].translation,
-            randomWords[1].word,
-            randomWords[1].translation,
-            randomWords[2].word,
-            randomWords[2].translation,
-            randomWords[3].word,
-            randomWords[3].translation,
-            randomWords[4].word,
-            randomWords[4].translation,
-            randomWords[5].word,
-            randomWords[5].translation,
-            randomWords[6].word,
-            randomWords[6].translation,
-            randomWords[7].word,
-            randomWords[7].translation,
-        ];
-        const shuffledCards = [];
-        for(let i=0; i<16; i++) {
-            shuffledValues[i] = cardsValues[shuffledArray[i]];
-            shuffledCards[i] = <div key={cardsValues[shuffledArray[i]]} className={`${css.gridItem}`} onClick={() => handleClick(i)}>{cardsValues[shuffledArray[i]]}</div>;
-        }
-        return shuffledCards;
-    }
+const MiniGameSection = ( {vocabulary, setWhichMenuClicked, moves, setMoves} : any ) => {
+  const boardEnglish = [   
+      vocabulary[0].wordEn + '-> 🤖',
+      vocabulary[1].wordEn + '-> 👽',
+      vocabulary[2].wordEn + '-> 👻',
+      vocabulary[3].wordEn + '-> 🤡',
+      vocabulary[4].wordEn + '-> 🐧',
+      vocabulary[5].wordEn + '-> 🦚',
+      vocabulary[6].wordEn + '-> 😄',
+      vocabulary[7].wordEn + '-> 🚀',
+  ]
+  const boardMongolian = [
+      vocabulary[0].definitionMn + '-> 🤖',
+      vocabulary[1].definitionMn + '-> 👽',
+      vocabulary[2].definitionMn + '-> 👻',
+      vocabulary[3].definitionMn + '-> 🤡',
+      vocabulary[4].definitionMn + '-> 🐧',
+      vocabulary[5].definitionMn + '-> 🦚',
+      vocabulary[6].definitionMn + '-> 😄',
+      vocabulary[7].definitionMn + '-> 🚀',
+  ]
+  const [boardData, setBoardData] : any = useState([]);
+  const [flippedCards, setFlippedCards] : any = useState([]);
+  const [matchedCards, setMatchedCards] : any = useState([]);
+  const [gameOver, setGameOver] = useState(false);
 
-    let generatedWords = generateRandomWords(0, vocabulary.words.length-1);
-    let shuffledElements = shuffleTheCards(generatedWords);
+  useEffect(() => {
+    initialize();
+  }, []);
 
-    const handleClick = (index : number) => {
-        if(toggleOnOff === 'off') {
-            // setToggleItem(index);
-            // setToggleOnOff('on');
-            toggleItem = index;
-            toggleOnOff = 'on';
-            shuffledElements[index] = <div key={shuffledValues[index]} className={`${css.gridItem} ${css.activedCard}`} onClick={() => handleClick(index)}>{shuffledValues[index]}</div>;
-        }
-        else {
-            if(toggleItem === index) {
-                toggleOnOff = 'off';
-                toggleItem = -1;
-                // setToggleOnOff('off');
-                // setToggleItem(-1);
-                shuffledElements[index] = <div key={shuffledValues[index]} className={`${css.gridItem}`} onClick={() => handleClick(index)}>{shuffledValues[index]}</div>;
-            }
-        }
+  const initialize = () => {
+    shuffle();
+    setGameOver(false);
+    setFlippedCards([]);
+    setMatchedCards([]);
+    setMoves(0);
+  };
+
+  useEffect(() => {
+    if (matchedCards.length == 16) {
+      setGameOver(true);
+      setWhichMenuClicked('miniGameWinningPage')
     }
+  }, [moves]);
 
-    return(
-        <div className={css.miniGameContainer}>
-            <p className={css.time}>5.6 seconds</p>
-            <div className={css.gameSection}>
-                {shuffledElements.map((item: any) => {
-                    return item;
-                })}
-            </div>
+  const shuffle = () => {
+    const shuffledCards : any = [...boardEnglish, ...boardMongolian].sort(() => Math.random() - 0.5).map((v) => v);
+    setBoardData(shuffledCards);
+  };
+
+  const updateActiveCards = (i : any) => {
+    if(!flippedCards.includes(i)) {
+      if(flippedCards.length == 1) {
+        const firstIdx = flippedCards[0];
+        const secondIdx = i;
+        if(boardData[firstIdx].split('->')[1] == boardData[secondIdx].split('->')[1]) {
+          setMatchedCards((prev : any) => [...prev, firstIdx, secondIdx]);
+        }
+        setFlippedCards([...flippedCards, i]);
+      }
+      else if(flippedCards.length == 2) {
+        setFlippedCards([i]);
+      }
+      else {
+        setFlippedCards([...flippedCards, i]);
+      }
+      setMoves((v : any) => v + 1);
+    }
+  };
+
+  return (
+    <div className={css.container}>
+        <div className={css.movesTitle}>
+            <p>{`Moves: ${moves}`}</p>
         </div>
-    );
+        <div className={css.board}>
+            {boardData.map((data : any, i : any) => {
+                const flipped = flippedCards.includes(i) ? true : false;
+                const matched = matchedCards.includes(i) ? true : false;
+                return (
+                <div
+                    onClick={() => {updateActiveCards(i);}}
+                    key={i}
+                    className={`${css.card} ${flipped || matched ? `${css.active}` : ""} ${matched ? `${css.matched}` : ""} ${gameOver ? `${css.gameover}` : ""}`}
+                >
+                    <div className={css.card_front}>{data}</div>
+                    <div className={css.card_back}></div>
+                </div>
+                );
+            })}
+        </div>
+        <div>
+            <button onClick={() => initialize()} className={css.reset_btn}>
+                Reset
+            </button>
+        </div>
+    </div>
+  );
 }
 
-export default MiniGameSection;
+export default MiniGameSection
