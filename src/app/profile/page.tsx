@@ -7,19 +7,17 @@ import axios from '../../apis/axios';
 
 import Navbar from '@/components/navbar';
 import FlashcardCongrats from '@/components/flashcardCongrats';
-import Flashcard from '@/components/flashcard';
 import MiniGameStart from '@/components/miniGameStart';
 import MiniGameProcess from '@/components/miniGameProcess';
+import VocabularyList from '@/components/vocabularyList';
+import FlashcardList from '@/components/flashcardList';
+import MiniGameCongrats from '@/components/miniGameCongrats';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons';
 import { faNoteSticky } from '@fortawesome/free-solid-svg-icons';
-import { faCheck} from '@fortawesome/free-solid-svg-icons';
-import { faXmark} from '@fortawesome/free-solid-svg-icons';
-import VocabularyList from '@/components/vocabularyList';
-import FlashcardList from '@/components/flashcardList';
 
 const Profile = () => {
     const session = useSession({
@@ -28,13 +26,11 @@ const Profile = () => {
           redirect('/signIn');
         }
     });
-    const [ whichMenuClicked, setWhichMenuClicked ] = useState('vocabulary');
-    const [ whichWord, setWhichWord ] = useState(0);
-    const [ learningCount, setLearningCount ] = useState(0);
-    const [ knowCount, setKnowCount ] = useState(0);
-    const [ vocabulary, setVocabulary ] : any = useState([]);
-    const [ email, setEmail ] = useState(session.data?.user?.email?.replaceAll('.', ','));
-    const [isCardFlipped, setIsCardFlipped] = useState(false);
+    const [whichMenuClicked, setWhichMenuClicked] = useState('vocabulary');
+    const [vocabulary, setVocabulary] : any = useState([]);
+    const [learningCount, setLearningCount] = useState(0);
+    const [moves, setMoves] = useState(0);
+    const [email, setEmail] = useState(session.data?.user?.email?.replaceAll('.', ','));
 
     useEffect(() => {
         const fetchData = async () => {
@@ -49,42 +45,10 @@ const Profile = () => {
     
         fetchData();
       }, [email]);
-    
-      useEffect(() => {
-        console.log('fetched data', vocabulary);
-      }, [vocabulary]);
-
-    const knowButtonHandle = () => {
-        if(vocabulary[0]) {
-            if(whichWord < vocabulary.length - 1) {
-                setWhichWord(whichWord + 1);
-                setKnowCount(knowCount + 1);
-            }
-            else if(whichWord == vocabulary.length - 1) {
-                setKnowCount(knowCount + 1);
-                setWhichMenuClicked('flashcardWinningPage');
-            }
-        }
-    }
-
-    const learningButtonHandle = () => {
-        if(vocabulary[0]) {
-            if(whichWord < vocabulary.length - 1) {
-                setWhichWord(whichWord + 1);
-                setLearningCount(learningCount + 1);
-            }
-            else if(whichWord == vocabulary.length - 1) {
-                setLearningCount(learningCount + 1);
-                setWhichMenuClicked('flashcardWinningPage');
-            }
-        }
-    }
 
     const changeContent = (whichContent : any) => {
         setWhichMenuClicked(whichContent);
-        setWhichWord(0);
         setLearningCount(0);
-        setKnowCount(0);
     }
 
     return(
@@ -107,13 +71,16 @@ const Profile = () => {
                 whichMenuClicked === 'vocabulary' && <VocabularyList vocabulary={vocabulary} session={session} />
             }
             {
-                whichMenuClicked === 'flashcards' && <FlashcardList vocabulary={vocabulary} setWhichMenuClicked={setWhichMenuClicked} learningCount={learningCount} setLearningCount={setLearningCount} />
-            }
-            {
                 whichMenuClicked === 'miniGameStart' && <MiniGameStart changeContent={changeContent} />
             }
             {
-                whichMenuClicked === 'miniGameProcess' && <MiniGameProcess vocabulary={vocabulary} />
+                whichMenuClicked === 'miniGameProcess' && <MiniGameProcess vocabulary={vocabulary} setWhichMenuClicked={setWhichMenuClicked} moves={moves} setMoves={setMoves} />
+            }
+            {
+                whichMenuClicked === 'miniGameWinningPage' && <MiniGameCongrats moves={moves} changeContent={changeContent} />
+            }
+            {
+                whichMenuClicked === 'flashcards' && <FlashcardList vocabulary={vocabulary} setWhichMenuClicked={setWhichMenuClicked} learningCount={learningCount} setLearningCount={setLearningCount} />
             }
             {
                 whichMenuClicked === 'flashcardWinningPage' && <FlashcardCongrats learning={learningCount} total={vocabulary.length} changeContent={changeContent}/>
