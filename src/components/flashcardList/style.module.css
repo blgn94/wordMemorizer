@@ -1,0 +1,89 @@
+.flashcardContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.scoreSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 800px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.learningText {
+    color: #CB4444;
+}
+
+.knowText {
+    color: #3B8E3A;
+}
+
+.flashcardButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 800px;
+    margin-top: 10px;
+}
+
+.faXmark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #111111;
+    border-radius: 50%;
+    color: #CB4444;
+    font-weight: bold;
+    font-size: 30px;
+    transition: all 0.2s ease;
+}
+
+.faXmark:hover {
+    transform: scale(0.8);
+}
+
+.faCheck {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #111111;
+    color: #3B8E3A;
+    font-weight: bold;
+    font-size: 30px;
+    transition: all 0.2s ease;
+}
+
+.faCheck:hover {
+    transform: scale(0.8);
+}
+
+@media screen and (max-width: 1000px) {
+    .scoreSection {
+        width: 80%;
+        font-size: 18px;
+    }
+    .flashcardButtons {
+        width: 80%;
+    }
+    .faCheck {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+    .faXmark {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+}
