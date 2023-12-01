@@ -1,0 +1,84 @@
+.congratsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
+
+.congratsSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex;
+    align-items: center;
+    text-align: start;
+    margin-bottom: 30px;
+}
+
+.congratsTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 16px;
+    margin-right: 30px;
+}
+
+.greyText {
+    color: #808080;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.playAgain {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 300px;
+    height: 70px;
+    background-color: #111111;
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.playAgain:hover {
+    transform: scale(0.96);
+}
+
+.restartIcon {
+    font-size: 30px;
+    margin: 0 20px;
+    color: #5786FF;
+}
+
+@media screen and (max-width: 700px) {
+    .congratsTitle {
+        font-size: 10px;
+        margin-right: 0;
+    }
+    .greyText {
+        font-size: 12px;
+    }
+    .congratsSection {
+        width: 80%;
+    }
+    .congratsPicture {
+        width: 80px;
+        height: 80px;
+    }
+    .playAgain {
+        width: 200px;
+        height: 50px;
+        border-radius: 20px;
+        padding: 20px;
+        font-size: 10px;
+    }
+    .restartIcon {
+        font-size: 20px;
+        margin: 0 10px;
+        color: #5786FF;
+    }
+}
