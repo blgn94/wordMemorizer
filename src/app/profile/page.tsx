@@ -18,6 +18,8 @@ import { faBoltLightning } from '@fortawesome/free-solid-svg-icons';
 import { faNoteSticky } from '@fortawesome/free-solid-svg-icons';
 import { faCheck} from '@fortawesome/free-solid-svg-icons';
 import { faXmark} from '@fortawesome/free-solid-svg-icons';
+import VocabularyList from '@/components/vocabularyList';
+import FlashcardList from '@/components/flashcardList';
 
 const Profile = () => {
     const session = useSession({
@@ -102,60 +104,10 @@ const Profile = () => {
                 </div>
             </div>
             {
-                whichMenuClicked === 'vocabulary' && 
-                <div>
-                    <h1>Collected words</h1>
-                    <div className={css.vocabularySection}>
-                        <div className={css.vocabularyContainer}>
-                            {
-                                vocabulary !== undefined ? vocabulary?.map((item : any) => {
-                                    return(
-                                        <div key={item.english} className={css.wordStyle}>
-                                            <span className={css.exactWordStyle}>{item.english}</span> <span>({item.type})</span> {" - "} <span className={css.mongolianWordStyle}>{item.mongolian}</span>
-                                        </div>
-                                    );
-                                }) : 
-                                <div className={css.wordStyle}>
-                                    <span>Хоосон байна!</span>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                    <div className={css.navigationStyle}></div>
-                </div>
+                whichMenuClicked === 'vocabulary' && <VocabularyList vocabulary={vocabulary} session={session} />
             }
             {
-                whichMenuClicked === 'flashcards' && 
-                <div>
-                    <div className={css.flashcardContainer}>
-                        <div className={css.scoreSection}>
-                            <p className={css.learningText}>{learningCount} Learning</p>
-                            {vocabulary ? <p>{whichWord+1}/{vocabulary.length}</p> : <p>{whichWord+1}/0</p>}
-                            <p className={css.knowText}>{knowCount} know</p>
-                        </div>
-                        <Flashcard vocabulary={vocabulary} index={whichWord} isCardFlipped={isCardFlipped} />
-                        <div className={css.flashcardButtons}>
-                            {
-                                vocabulary ? 
-                                <div className={css.faXmark} onClick={() => {learningButtonHandle(); setIsCardFlipped(true)}}>
-                                    <FontAwesomeIcon width={30} icon={faXmark} />
-                                </div> :
-                                <div className={css.faXmark}>
-                                    <FontAwesomeIcon width={30} icon={faXmark} />
-                                </div>
-                            }
-                            {
-                                vocabulary ?
-                                <div className={css.faCheck} onClick={() => {knowButtonHandle(); setIsCardFlipped(true)}}>
-                                    <FontAwesomeIcon width={30} icon={faCheck} />
-                                </div> :
-                                <div className={css.faCheck}>
-                                    <FontAwesomeIcon width={30} icon={faCheck} />
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
+                whichMenuClicked === 'flashcards' && <FlashcardList vocabulary={vocabulary} setWhichMenuClicked={setWhichMenuClicked} learningCount={learningCount} setLearningCount={setLearningCount} />
             }
             {
                 whichMenuClicked === 'miniGameStart' && <MiniGameStart changeContent={changeContent} />
