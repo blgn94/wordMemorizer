@@ -14,13 +14,13 @@ const FlashcardCongrats = ( {learning, total, changeContent} : any ) => {
                 <h1>Amazing! Congratulations</h1>
                 <Image src='/congrats.png' alt='congrats image' width={100} height={100} />
             </div>
-            <div className={css.reviewContainer}>
+            {/* <div className={css.reviewContainer}>
                 <FontAwesomeIcon className={css.reviewIcon} width={30} icon={faRotateRight} />
                 <div className={css.reviewTextContainer}>
                     <h1>Review the though terms</h1>
                     <p className={css.smallGreyTexts}>Review flashcards again with {learning} terms you`ve still learning</p>
                 </div>
-            </div>
+            </div> */}
             <div className={css.restartContainer} onClick={() => changeContent("flashcards")}>
                 <FontAwesomeIcon className={css.restartIcon} width={30} icon={faCheckDouble} />
                 <div className={css.restartTextContainer}>
