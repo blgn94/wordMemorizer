@@ -71,7 +71,7 @@ const Profile = () => {
                 whichMenuClicked === 'vocabulary' && <VocabularyList vocabulary={vocabulary} session={session} />
             }
             {
-                whichMenuClicked === 'miniGameStart' && <MiniGameStart changeContent={changeContent} />
+                whichMenuClicked === 'miniGameStart' && <MiniGameStart changeContent={changeContent} vocabulary={vocabulary} />
             }
             {
                 whichMenuClicked === 'miniGameProcess' && <MiniGameProcess vocabulary={vocabulary} setWhichMenuClicked={setWhichMenuClicked} moves={moves} setMoves={setMoves} />
