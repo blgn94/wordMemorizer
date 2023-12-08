@@ -4,7 +4,6 @@ import {signInWithEmailAndPassword} from 'firebase/auth';
 import { auth } from "../../../src/app/firebase";
 
 export const authOptions = {
-  // Configure one or more authentication providers
   pages: {
     signIn: '/signIn'
   },
