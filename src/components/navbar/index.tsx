@@ -21,7 +21,7 @@ const Navbar = ({session} : any) => {
         <div className={css.navbar}>
             <Link href={'/'} className={css.logoSection}>
                 <Image src='/SubLingoLogo.png' alt='Sublingo logo' width={40} height={40} />
-                <h1>SubLingo</h1>
+                <h1>WordMemorizer</h1>
             </Link>
             {/* <div>{session?.data?.user?.email}</div> */}
             {
