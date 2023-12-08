@@ -1,3 +1,22 @@
+/**
+*   SignInPage бүрэлдэхүүн хэсэг
+*
+*   Энэ бүрэлдэхүүн хэсэг нь хэрэглэгчдэд итгэмжлэлээ оруулах боломжтой нэвтрэх хуудсыг төлөөлдөг
+*   нэвтрэх. Үүнд цахим шуудан, нууц үг оруулах маягт, "Нууц үгээ март" холбоос,
+*   "Одоо бүртгүүлэх" холбоос, итгэмжлэл эсвэл Google-ээр нэвтрэх товчлуурууд.
+*
+*   Ашигласан бүрэлдэхүүн хэсгүүд:
+*   - Navbar: Navigation bar бүрэлдэхүүн хэсэг.
+*
+*   Properties:
+*   - email: Хэрэглэгчийн имэйлийн оролт.
+*   - password: Хэрэглэгчийн нууц үг оруулт.
+*
+*   Функцууд:
+*   - signIn: "Нэвтрэх" товчийг дарснаар NextAuth signIn-ийг итгэмжлэлээр ашиглаж, амжилттай болсны 
+*   дараа нүүр хуудас руу дахин чиглүүлэх үед функц идэвхждэг.
+*/
+
 'use client'
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
@@ -9,8 +28,11 @@ import css from './style.module.css';
 import Navbar from '@/components/navbar';
 
 const SignInPage = () => {
+    // Имэйл болон нууц үгийн оролтын төлөвийн хувьсагч
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    // Нэвтрэх хуудсыг төлөөлөх JSX элементүүд
     return (
         <div className={css.HomePage}>
             <div className={css.darkLayer}>
