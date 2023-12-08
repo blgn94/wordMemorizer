@@ -1,3 +1,22 @@
+/**
+*   ForgetPassword бүрэлдэхүүн хэсэг
+*   
+*   Энэ бүрэлдэхүүн хэсэг нь "Нууц үгээ март" хуудсыг төлөөлдөг бөгөөд хэрэглэгчид нууц үгээ 
+*   шинэчлэх холбоосыг хүлээн авахын тулд имэйлээ оруулах боломжтой. Энэ нь нууц үг шинэчлэх 
+*   имэйл илгээхийн тулд Firebase баталгаажуулалтыг ашигладаг.
+*   
+*   Ашигласан бүрэлдэхүүн хэсгүүд:
+*   - Navbar: Хэрэглэгчийн мэдээллийг харуулах навигацийн талбар.
+*   
+*   State:
+*   - email: Нууц үг шинэчлэх хэрэглэгчийн имэйл хаягийг илэрхийлсэн мөр.
+*   - router: Next.js чиглүүлэгчтэй программчлагдсан навигацийн объект.
+*   
+*   Функцууд:
+*   - handleNavigation: Хэрэглэгчийг нэвтрэх хуудас руу буцаана.
+*   - resetPassword: Оруулсан имэйл рүү нууц үг шинэчлэх имэйл илгээхийг идэвхжүүлнэ.
+*/
+
 'use client'
 import { useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
@@ -12,16 +31,24 @@ import css from './style.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 
+
 const ForgetPassword = () => {
+    // Хэрэглэгчийн имэйлийг хадгалах төлөв
     const [email, setEmail] = useState('');
     const router = useRouter();
+
+    // Нэвтрэх хуудас руу буцах navigation зохицуулах функц
     const handleNavigation = () => {
         router.push('/signIn');
     }
+
+    // Firebase баталгаажуулалтыг ашиглан нууц үгээ шинэчлэх функц
     const resetPassword = () => {
         sendPasswordResetEmail(auth, email);
         router.push('/signIn')
     }
+
+    // ForgetPassword бүрэлдэхүүн хэсгийн JSX бүтэц
     return (
         <div className={css.HomePage}>
             <div className={css.darkLayer}>
@@ -60,10 +87,11 @@ const ForgetPassword = () => {
                             Sign In
                         </button>
                     {/* </form> */}
-                </div>
+                </div>default
             </div>
         </div>
     );
 }
 
+// ForgetPassword бүрэлдэхүүн хэсгийг экспортлох
 export default ForgetPassword;

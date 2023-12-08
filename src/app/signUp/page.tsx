@@ -1,3 +1,24 @@
+/**
+*   SignUp бүрэлдэхүүн хэсэг
+*   
+*   Энэ бүрэлдэхүүн хэсэг нь хэрэглэгчид шинэ данс үүсгэх боломжтой бүртгүүлэх хуудсыг төлөөлдөг.
+*   Энэ нь имэйл, нууц үг, нууц үг баталгаажуулах талбар бүхий маягтыг агуулдаг.
+*   Хэрэглэгчид өөрсдийн цахим шуудан болон нууц үгээ ашиглан бүртгүүлэх боломжтой бөгөөд өгөгдлийг 
+*   баталгаажуулахын тулд Firebase руу илгээдэг.
+*   
+*   Ашигласан бүрэлдэхүүн хэсгүүд:
+*   - Navbar: Хэрэглэгчийн мэдээллийг харуулах навигацийн талбар.
+*   
+*   Properties:
+*   - email: Хэрэглэгчийн имэйлийн оролт.
+*   - password: Хэрэглэгчийн нууц үг оруулах.
+*   - passwordAgain: Хэрэглэгчийн нууц үгийг баталгаажуулах оролт.
+*   
+*   Функцууд:
+*   - handleNavigation: Хэрэглэгчийг нэвтрэх хуудас руу буцаана.
+*   - бүртгүүлэх: Хэрэглэгчийн баталгаажуулалтад зориулж имэйл болон нууц үгийн өгөгдлийг Firebase руу илгээдэг.
+*/
+
 'use client'
 import { useRouter } from 'next/navigation';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -12,20 +33,24 @@ import css from './style.module.css';
 import Navbar from '@/components/navbar';
 
 const SignUp = () => {
+    // Имэйл, нууц үг, нууц үгийн баталгаажуулалтын төлөвийн хувьсагч
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordAgain, setPasswordAgain] = useState('');
     const router = useRouter();
     
+    // Хэрэглэгчийг нэвтрэх хуудас руу буцаана
     const handleNavigation = () => {
         router.push('/signIn');
     }
 
+    // Хэрэглэгчийн баталгаажуулалтад зориулж имэйл болон нууц үгийн өгөгдлийг Firebase руу илгээдэх
     const signup = () => {
         createUserWithEmailAndPassword(auth, email, password);
         router.push('/signIn')
     };
 
+    // Бүртгүүлэх хуудсыг төлөөлөх JSX элементүүд
     return(
         <div className={css.HomePage}>
             <div className={css.darkLayer}>
