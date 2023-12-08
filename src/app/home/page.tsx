@@ -1,3 +1,29 @@
+/**
+*   Нүүр хуудасны бүрэлдэхүүн хэсэг
+*
+*   Энэ бүрэлдэхүүн хэсэг нь хэрэглэгчид сурахад зориулж шинэ үг оруулах, хадгалах үндсэн хуудсыг төлөөлдөг.
+*
+*   - State:
+*     - typedWord: Сурах үгийн оруулах талбар.
+*     - typedWordDefinition: Үгийн тодорхойлолтыг оруулах талбар.
+*     - typedWordType: Үгийн төрлийг сонгох унадаг цэс (Noun, Verb, Adjective, Adverb).
+*     - isSuccessfulSaved: Хадгалах үйлдлийн төлөвийг (амжилттай, бүтэлгүйтсэн эсвэл анхны төлөв) заана.
+*     - userWordData: Серверээс авсан хэрэглэгчийн үгийн өгөгдлийг хадгалах массив.
+*     - userWordDataJson: userWordData-н JSON дүрслэлийг агуулна.
+*
+*   - Үр дүн:
+*     - Оруулсан талбаруудыг арилгаж, хадгалсны дараа Амжилттай Хадгалагдсан (isSuccessfulSaved) гэдгийг дахин тохируулна.
+*
+*   - Функцууд:
+*     - handleSubmit: Маягт илгээхийг зохицуулж, хэрэв оролт хүчинтэй бол үг хадгалахыг идэвхжүүлнэ.
+*     - saveWord: Сервер дээрх хэрэглэгчийн жагсаалтад шинэ үгийг хадгална.
+*     - handleCardClick: Flashcard товчлуур дээр дарах үйл явдлыг зохицуулдаг.
+*    
+*   - Гадаад хамаарал:
+*     - React: Бүрэлдэхүүн хэсгийн төлөвийг удирдахад төлөв болон эффектийн дэгээг ашигладаг.
+*     - axios: Асинхрон HTTP хүсэлтийг зохицуулдаг.
+*/
+
 'use client'
 import css from './style.module.css';
 import Navbar from '../../components/navbar';
@@ -5,15 +31,18 @@ import { useState, useEffect } from 'react';
 import axios from '../../apis/axios';
 
 const HomePage = ({session} : any) => {
+    // Оролтын талбарууд болон амжилт/алдааны мэдэгдлүүдийг удирдах хувьсагчдын төлөв
     const [typedWord, setTypedWord] = useState('');
     const [typedWordDefinition, setTypedWordDefinition] = useState('');
     const [typedWordType, setTypedWordType] = useState('');
     const [isSuccessfulSaved, setIsSuccessfulSaved] = useState('failed');
     const hasNumber = /\d/;
 
+    // Хэрэглэгчийн үгийн өгөгдлийг хадгалах массив
     let userWordData : any = [];
     let userWordDataJson;
 
+    // Оролтын талбарууд болон саатсаны дараа амжилт/алдааны мэдэгдлүүдийг арилгах эффект
     useEffect(() => {
         setTypedWord('');
         setTypedWordDefinition('');
@@ -21,8 +50,10 @@ const HomePage = ({session} : any) => {
         setTimeout(() => {setIsSuccessfulSaved('failed')}, 3000);
     }, [isSuccessfulSaved])
 
+    // Маягт илгээхийг зохицуулах
     const handleSubmit = (e : any) => {
         e.preventDefault();
+        // Үгэнд тоо байгаа эсэхийг шалгана
         if(!hasNumber.test(typedWord)) {
             saveWord(typedWord, typedWordDefinition, typedWordType);
         }
@@ -31,8 +62,10 @@ const HomePage = ({session} : any) => {
         }
     }
 
+    // Хэрэглэгчийн өгөгдөлд үгийг хадгалах функц
     const saveWord = (word : string, pressedWordDefinition: string, pressedWordType: string) => {
         const email = session.data?.user?.email?.replaceAll('.', ',');
+        // Хэрэглэгчийн үгийн өгөгдлийг серверээс авах
         axios.get(`/users/${email}/words.json`).then(res => {
             userWordDataJson = res.data;
             userWordData = Array.of(userWordDataJson);
@@ -40,12 +73,14 @@ const HomePage = ({session} : any) => {
         }).then(() => {
             if(userWordData[0] != null && userWordData != null) {
                 let sameWord = 0;
+                // Тухайн үг хэрэглэгчийн үгийн жагсаалтад байгаа эсэхийг шалгах
                 for(var i=1; i<userWordData[0].length; i++) {
                     if(userWordData[0][i].english === word) {
                         sameWord = 1;
                         break;
                     }
                 }
+                // Хэрэглэгчийн үгийн жагсаалтад үгийг нэмж, сервер дээр шинэчилэх
                 if(!sameWord) {
                     userWordData = [
                         ...userWordData[0],
@@ -70,6 +105,7 @@ const HomePage = ({session} : any) => {
                 }
             }
             else {
+                // Хэрэв хэрэглэгчийн үгийн өгөгдөл байхгүй бол шинэ массив үүсгээд сервер дээр шинэчилэх
                 userWordData = [
                     {
                         wordEn: word,
@@ -84,6 +120,8 @@ const HomePage = ({session} : any) => {
             }
         });
     }
+
+    // Нүүр хуудасны бүрэлдэхүүн хэсгийг үзүүлэх
     return (
         <div className={css.HomePage}>
             <div className={css.darkLayer}>
@@ -131,4 +169,5 @@ const HomePage = ({session} : any) => {
     );
 }
 
+// Нүүр хуудасны бүрэлдэхүүн хэсгийг экспортлох
 export default HomePage;
